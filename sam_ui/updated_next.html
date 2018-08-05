@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.js"></script>
+    <style >
+    body{
+    background: #E9D460;
+    }
+    .btnn{
+    width: 100%;
+    border: 0px;
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 2%;
+    }
+    a{
+        color: white;
+    }
+    div{
+        margin-bottom: 10px;
+    }
+    .map{
+        width: 100%;
+        height: 350px;
+        background: white;
+    }
+    </style>
+    <title>Signup</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1><b>Signup</b></h1> <br>
+        <div class="col-md-7 col-lg-7 col-sm-12 sol-xs-12">
+            <h4><b>Choose your location</b></h4>
+            <br><br>
+            <div class="map">
+              <head>
+ <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC9XaK-ZI3PmyNgCGBBgsnyAoeXZayqmk.exp&sensor=false"></script>
+        <script>
+		
+            var map,
+                mLat,
+                mLng;
+                
+            function initialize() {
+                var mapOptions = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(11.397, 77.644),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById('map_canvas'),
+                    mapOptions
+                );
+                // add a click event listener to
+                // get the lat/lng from click event of map
+                google.maps.event.addListener(map, 'click', function(event) {
+                    mLat = event.latLng.lat();
+                    mLng = event.latLng.lng();
+                    document.getElementById('latMap').value = mLat;
+                    document.getElementById('lngMap').value = mLng;
+                });
+            }
+            function mapDivClicked (event) {
+                var target = document.getElementById('map_canvas'),
+                    posx = event.pageX - target.offsetLeft,
+                    posy = event.pageY - target.offsetTop,
+                    bounds = map.getBounds(),
+                    neLatlng = bounds.getNorthEast(),
+                    swLatlng = bounds.getSouthWest(),
+                    startLat = neLatlng.lat(),
+                    endLng = neLatlng.lng(),
+                    endLat = swLatlng.lat(),
+                    startLng = swLatlng.lng(),
+                    lat = startLat + ((posy/350) * (endLat - startLat)),
+                    lng = startLng + ((posx/500) * (endLng - startLng));
+
+                document.getElementById('posX').value = posx;
+                document.getElementById('posY').value = posy;
+                document.getElementById('lat').value = lat; // calculated lat
+                document.getElementById('lng').value = lng; // calculated lng
+
+                // the error rate
+                document.getElementById('latErr').value = ((mLat - lat) / (endLat - startLat) * 100).toFixed(2);
+                document.getElementById('lngErr').value = ((mLng - lng) / (endLng - startLng) * 100).toFixed(2);
+            }
+            
+			 if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            infoWindow.open(map);
+            map.setCenter(pos);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+      }
+
+      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+        infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        infoWindow.open(map);
+      }
+    </script>
+        </script>
+		
+    </head>
+    <body>
+	 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC9XaK-ZI3PmyNgCGBBgsnyAoeXZayqmk&callback=initMap"
+    async defer></script>
+        <div id="map_canvas" onclick="mapDivClicked(event);" style="height: 450px; width: 650px;"></div>
+        <div>
+		 <input id="posX" type="hidden" />
+       <input id="posY" type="hidden" />
+
+        </div>  
+</div>
+</div>		
+        <div class="col-md-1 col-lg-1"></div>
+        <div class="col-md-4 col-lg-4 col-sm-12 sol-xs-12">
+		    <label for="">Latitude</label>
+           <input type="text" name="" id="lat" class="form-control"><br>
+		   <label for="">Longitude</label>
+           <input type="text" name="" id="lng" class="form-control"><br>
+		   
+            <label for="">Address</label>
+            <textarea name="" id="" cols="30" rows="5" class="form-control"></textarea><br>
+            <label for="">City</label>
+            <input type="text" name="" id="" class="form-control"><br>
+            <label for="">State</label>
+            <input type="text" name="" id="" class="form-control"><br>
+            <label for="">Pincode</label>
+            <input type="text" name="" id="" class="form-control"><br><br>
+            <a href="#" id="btton"><button class="btnn"><h5><b>Signup</b></h5></button></a>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<html>
+<head>
+    <style >
+    body{
+    background: #E9D460;
+    }
+	#Layer1 {
+	position:absolute;
+	width:441px;
+	height:499px;
+	z-index:1;
+	left: 238px;
+	top: 12px;
+}
+ /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 10px;
+        left: 75%;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+        text-align: center;
+        font-family: 'Roboto','sans-serif';
+        line-height: 30px;
+        padding-left: 10px;
+      }
+      #floating-panel {
+        position: absolute;
+        top: 5px;
+        left: 50%;
+        margin-left: -180px;
+        width: 350px;
+        z-index: 5;
+        background-color: #fff;
+        padding: 5px;
+        border: 1px solid #999;
+      }
+      #latlng {
+        width: 225px;
+
+	</style>
+	</head>
+	 <body>
+	 <div>
+    <div id="floating-panel">
+      <input id="latlng" type="text" value="sam">
+      <input id="submit" type="button" value="Reverse Geocode">
+    </div>
+	<div id="Layer1">
+    <div id="map">
+    <script>
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 8,
+          center: {lat: 40.731, lng: -73.997}
+        });
+        var geocoder = new google.maps.Geocoder;
+        var infowindow = new google.maps.InfoWindow;
+        
+        document.getElementById('latlng').addEventListener("onmouseover", function() {
+          geocodeLatLng(geocoder, map, infowindow);
+        });
+		 //geocodeLatLng(geocoder,map,infowindow);
+      }
+      
+      function geocodeLatLng(geocoder, map, infowindow) {
+       // var input = document.getElementById('latlng').value;
+	   var input="11.21212,76.5542422";
+        var latlngStr = input.split(',', 2);
+        var latlng = {lat: parseFloat(latlngStr[0]), lng: parseFloat(latlngStr[1])};
+        geocoder.geocode({'location': latlng}, function(results, status) {
+          if (status === 'OK') {
+            if (results[0]) {
+              map.setZoom(11);
+              var marker = new google.maps.Marker({
+                position:latlng,
+                map: map
+              });
+
+// OR
+// var pinCode = locationArr[1].replace(/\D+/g, '');
+			  var v=results[0].formatted_address;
+			 var loc=v.split(",");
+			 // var pinCode = loc[1].slice(-6);
+			  //var locationArr =v.split(',');
+			//var cityName = locationArr[0]; // New York City
+			//var pinCode = locationArr[1].match(/\d+/)[0]; // 10024
+			the=loc[2].slice(-6);
+		//the=the.slice(-4);
+			console.log(the);
+			window.alert(the);
+            } else {
+              window.alert('No results found');
+            }
+          } else {
+            window.alert('Geocoder failed due to: ' + status);
+          }
+        });
+      }
+	  
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC9XaK-ZI3PmyNgCGBBgsnyAoeXZayqmk&callback=initMap">
+    </script>
+</div>
+</div>
+  </body>
+</html>

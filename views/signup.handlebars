@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <style >
+    body{
+    background: #E9D460;
+    }
+    .btnn{
+    width: 250px;
+    border: 0px;
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 2%;
+    }
+    a{
+        color: white;
+    }
+    .box{
+        border-left: 2px solid black;
+        padding: 10px;
+    }
+    div{
+        margin-bottom: 10px;
+    }
+    </style>
+    <title>Signup</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        {{#if errors}}
+        {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+        {{/each}}
+        {{/if}}
+        <h1><b>Signup</b></h1> <br>
+        <form method="post" action="/users/register">
+        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <label for="user">Mobile no</label><br>
+            <input type="number" class="input_field form-control" id='user' name="mobile_no"><br>
+            <label for="user">Password</label><br>
+            <input type="password" class="input_field form-control" id='user' name="password">
+            <b>must contain 6 characters.</b><br>
+            <br><br>
+            <label for="user">No.Of.Persons</label><br>
+            <input type="number" class="input_field form-control" id='user' name="no_of_persons"><br>
+            <label for="number">Aadhar Number of Person 2</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar2"><br>
+            <label for="number">Aadhar Number of Person 4</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar4"><br>
+        </div>
+        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <label for="user">Aadhaar Number</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar"><br>
+            <label for="password">Confirm your password</label><br>
+            <input type="password" class="input_field form-control" id='user' name="password2"><br>
+            <br><br>
+            <label for="user">Aadhar Number of Person 1</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar1"><br>
+            <label for="user">Aadhar Number of Person 3</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar3"><br>
+            <label for="user">Aadhar Number of Person 5</label><br>
+            <input type="number" class="input_field form-control" id='user' name="aadhar5"><br>
+
+            <button type="submit" class="btnn"><b>NEXT</b></button>
+        </form>
+        </div>
+        <div class="col-md-1 col-lg-1 col-sm-12 col-xs-12"></div>
+        <div class="col-md-5 col-lg-5 col-sm-12 col-xs-12">
+            <div class="box">
+            <h3><b>Rules to register</b></h3>
+            <p>A prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses.a prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses,a prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses,</p>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <style>
+        body{
+            background: #E9D460;
+        } 
+        input{
+            width: 250px;
+            background: ;
+            border:0px;
+            height: 40px;
+            padding: 10px;
+            border-radius: 2%;
+        }
+		select
+		{
+		width: 250px;
+            background: ;
+            border:0px;
+            height: 40px;
+            padding: 10px;
+            border-radius: 2%;
+		}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Add or Remove</h1>
+        </div>
+        <div class="row">
+            <form method="post" action="/">
+            <div class="col-md-3 col-lg-3"></div>
+            <div class="col-md-9 col-lg-9">
+                <h1>Add</h1><br>
+                <input type="text" name="name" id="name" placeholder="Name"><br><br>
+                <input type="text" name="aadhar" id="aadhar" placeholder="Aadhar Id"><br><br>
+                <button type="submit" class="btnn"><b>Add</button>
+                </b></form>
+            </div>
+        </div><br>
+        <div class="row">
+                <div class="col-md-3 col-lg-3"></div>
+                <div class="col-md-9 col-lg-9">
+                    <h1>Remove</h1><br>
+
+</head>
+
+<br><br>
+<form name="drop_list" action="/rm" method="POST" >
+		
+
+  <label>Mode:</label>
+  <select name="remove" id="remove">
+  {{#each user.members }}
+  <option value="{{this.name}}" id ="remove" name="remove" {{#selected}} selected="selected" {{/selected}}>{{this.name}}</option>
+  {{/each}}
+  </select>
+
+
+ <br><br><button type="submit" class="btnn">Remove</button>
+                </form>
+                </div>
+
+            </div>
+    </div>
+
+</body>
+</html>
+

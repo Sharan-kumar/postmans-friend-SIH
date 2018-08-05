@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <title>Unique id deatails</title>
+    <style>
+        body{
+            background: #E9D460;
+        }
+        input{
+            width: 250px;
+            background: ;
+            border:0px;
+            height: 40px;
+            padding: 10px;
+            border-radius: 2%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1>Link your data</h1>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 col-md-4"></div>
+            <div class="col-lg-4 col-md-4 box">
+			<br>
+			<br>
+			<br>
+                <form  method="post" action="/users/insert">
+                <input type="text" name="propertyId" id="propertyId" placeholder="Property Id"><br><br>
+				        <input type="text" name="address" id="address" placeholder="Address"><br><br>
+				        <input type="text" name="city" id="city" placeholder="City"><br><br>
+                <input type="text" name="state" id="state" placeholder="State"><br><br>
+                <input type="text" name="pincode" id="pincode" placeholder="Pin code"><br><br>
+                <input type="text" name="ownerName" id="ownerName" placeholder="Owner name"><br><br>
+                <button type="submit" class="btnn">Add</button>
+            </div>
+        </div>
+    </div>
+</body
+</html>

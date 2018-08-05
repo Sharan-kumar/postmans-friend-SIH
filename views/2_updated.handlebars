@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <br>
+    <br>
+    <b><center>unique ID: {{uniq}}</center></b>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <style>
+        body{
+            background: #E9D460;
+        }    
+        .qrcode{
+            width:350px;
+            height:350px;
+            left:20px;;
+            position:absolute;
+            top:20px;
+        }
+        .mem{
+            position:absolute;
+            top: 0px;
+            left:250px;
+        }
+        .mini{
+            background: white;
+            left:250px;
+            width:350px;
+            height:350px;
+        }
+        .b1{
+            position:absolute;
+            top:300px;
+    }
+        .b2{
+            position:absolute;
+            top:340px; 
+        }
+        .b3{
+            position:absolute;
+            top:380px;
+        }
+        #Layer1 {
+    position:absolute;
+    width:200px;
+    height:115px;
+    z-index:1;
+    left: 69px;
+    top: 22px;
+}
+#log
+{
+    position:absolute; 
+    left:90%;
+    top:-360px;
+}
+    </style>
+</head>
+<body>
+    <div id=log>
+          <a class="btn btn-danger b3" href="/users/logout">LOG OUT</a><br>
+      </div>
+<div id=Layer1>
+      
+    <b>LOGIN SUCCESSFUL</b>
+    </div>
+    <div class="container">
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-md-2 col-lg-2"></div>
+            <div class="col-md-4 col-lg-4 box">
+                <br>
+                <div class="qrcode">
+                <b>The QRcode for your location:</b>
+                <head>
+<script type="text/javascript" src="/js/jquery.min.js"></script>
+<script type="text/javascript" src="/js/qrcode.js"></script>
+</head>
+<body>
+<input id="text" type="hidden" value="{{user.lat}},{{user.lng}}" style="width:80%" /><br />
+<div id="qrcode" style="width:100px; height:100px; margin-top:25px;"></div>
+<script type="text/javascript">
+var qrcode = new QRCode(document.getElementById("qrcode"), {
+    width : 200,
+    height : 200
+});
+
+function makeCode () {      
+    var elText = document.getElementById("text");
+    
+    if (!elText.value) {
+        alert("Input a text");
+        elText.focus();
+        return;
+    }
+    
+    qrcode.makeCode(elText.value);
+}
+
+makeCode();
+
+$("#text").
+    on("blur", function () {
+        makeCode();
+    }).
+    on("keydown", function (e) {
+        if (e.keyCode == 13) {
+            makeCode();
+        }
+    });
+</script>
+</body>
+                <div class="mem">
+                    <h4><b>Members:</b></h4>
+                    <div class="mini">
+                        <br>
+                        <br>
+                        <br>
+                    <ol class="people_list">
+                      {{#each user.members}}
+                        <li>{{this.name}}</li>
+                        <br>
+                      {{/each}}
+                         </ol>
+                    </div>
+                </div>
+                 </div>
+                 <a class="btn btn-primary b1" href="https://www.google.com/maps/@{{user.lat}},{{user.lng}}">Share</a><br>
+                <!--<button class="btn btn-primary b1" type="submit">Share</button><br>-->
+                 <a class="btn btn-success b2" href="">Update</a><br>
+                <!--<button class="btn btn-success b2">Update</button><br>-->
+                 <a class="btn btn-danger b3" href="/add">Add or Remove</a><br>
+                <!--<button class="btn btn-danger b3">Add or Remove</button>-->
+           
+        </div>
+    </div>
+</body>
+</html>

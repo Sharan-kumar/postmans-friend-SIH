@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="/js/jquery.min.js"></script>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="/js/bootstrap.js"></script>
+    <style >
+    body{
+    background: #E9D460;
+    }
+    .btnn{
+    width: 250px;
+    border: 0px;
+    background: black;
+    color: white;
+    padding: 5px;
+    border-radius: 2%;
+    }
+    a{
+        color: white;
+    }
+    .box{
+	     top:12%;
+        border-left: 2px solid black;
+        padding: 10px;
+    }
+    div{
+        margin-bottom: 10px;
+    }
+	#contr{
+	position:absolute;
+	width:658px;
+	height:321px;
+	z-index:1;
+	left: 700px;
+	top: 24px;
+	}
+	
+	#form{
+	position:absolute;
+	width:558px;
+	height:321px;
+	z-index:1;
+	left: 729px;
+	top: 394px;
+	}
+	#lmap{
+	position:absolute;
+	width:556px;
+	height:399px;
+	z-index:2;
+	left: 5px;
+	top: 393px;
+	}
+	input
+		{
+		    width: 250px;
+            background: ;
+            border:0px;
+            height: 30px;
+            padding: 10px;
+            border-radius: 2%;
+		}
+    </style>
+	 <script type='text/javascript'>
+        function addFields(){
+            // Number of inputs to create
+            var number = document.getElementById("member").value;
+            // Container <div> where dynamic content will be placed
+            var contr = document.getElementById("contr");
+            // Clear previous contents of the container
+            while (contr.hasChildNodes()) {
+                contr.removeChild(contr.lastChild);
+            }
+            for (i=0;i<number;i=i+1){
+                // Append a node with a random text
+				contr.appendChild(document.createTextNode("Name" + (i+1)+': '));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "name" + i;
+                contr.appendChild(input);
+               // contr.appendChild(document.createElement(" "));
+                contr.appendChild(document.createTextNode("  Aadhar" + (i+1)+': '));
+                // Create an <input> element, set its type and name attributes
+                var input = document.createElement("input");
+                input.type = "text";
+                input.name = "member" + i;
+                contr.appendChild(input);
+                // Append a line break 
+				contr.appendChild(document.createElement("br"));
+				contr.appendChild(document.createElement("br"));
+            }
+        }
+    </script>
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC9XaK-ZI3PmyNgCGBBgsnyAoeXZayqmk.exp&sensor=false"></script>
+        <script>
+        
+            var map,
+                mLat,
+                mLng;
+                
+            function initialize() {
+                var mapOptions = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(11.397, 77.644),
+                    mapTypeId: google.maps.MapTypeId.ROADMAP
+                };
+                map = new google.maps.Map(document.getElementById('map_canvas'),
+                    mapOptions
+                );
+                // add a click event listener to
+                // get the lat/lng from click event of map
+                google.maps.event.addListener(map, 'click', function(event) {
+                    mLat = event.latLng.lat();
+                    mLng = event.latLng.lng();
+                    document.getElementById('latMap').value = mLat;
+                    document.getElementById('lngMap').value = mLng;
+                });
+            }
+            function mapDivClicked (event) {
+                var target = document.getElementById('map_canvas'),
+                    posx = event.pageX - target.offsetLeft,
+                    posy = event.pageY - target.offsetTop,
+                    bounds = map.getBounds(),
+                    neLatlng = bounds.getNorthEast(),
+                    swLatlng = bounds.getSouthWest(),
+                    startLat = neLatlng.lat(),
+                    endLng = neLatlng.lng(),
+                    endLat = swLatlng.lat(),
+                    startLng = swLatlng.lng(),
+                    lat = startLat + ((posy/350) * (endLat - startLat)),
+                    lng = startLng + ((posx/500) * (endLng - startLng));
+
+                document.getElementById('posX').value = posx;
+                document.getElementById('posY').value = posy;
+                document.getElementById('lat').value = lat; // calculated lat
+                document.getElementById('lng').value = lng; // calculated lng
+
+                // the error rate
+                document.getElementById('latErr').value = ((mLat - lat) / (endLat - startLat) * 100).toFixed(2);
+                document.getElementById('lngErr').value = ((mLng - lng) / (endLng - startLng) * 100).toFixed(2);
+            }
+            google.maps.event.addDomListener(window, 'load', initialize);
+        </script>
+</head>
+    <title>Signup</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        {{#if errors}}
+        {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+        {{/each}}
+        {{/if}}
+        <h1><b>Signup</b></h1> <br>
+        <form method="post" action="/users/register">
+        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <label for="user">Mobile no</label><br>
+            <input type="number" class="input_field form-control" id='mobile_no' name="mobile_no"><br>
+            <label for="user">Password</label><br>
+            <input type="password" class="input_field form-control" id='password' name="password">
+            <b>must contain 6 characters.</b><br>
+            <br><br>
+            <b>No of Persons</b>
+			 <input type="text" id="member" name="member" value="">Number of members:<br />
+               <a href="#" id="filldetails" onclick="addFields()">Fill Details</a>
+    
+        </div>
+		
+        <div class="col-md-3 col-lg-3 col-sm-12 col-xs-12">
+            <label for="user">Email</label><br>
+            <input type="" class="input_field form-control" id='username' name="username"><br>
+            <label for="password">Confirm your password</label><br>
+            <input type="text" class="input_field form-control" id='password2' name="password2"><br>
+            <br><br>
+           <!--<a href="next.html" id="btton"><button class="btnn"><h5><b>Next</b></h5></button></a>-->
+        </div>
+		
+		<div id="contr">
+            
+		</div>
+    </div>
+       <div id="lmap">
+            <h4><b>Choose your location</b></h4>
+            <br><br>
+            <div class="map">
+              <head>
+
+		
+    </head>
+	 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDC9XaK-ZI3PmyNgCGBBgsnyAoeXZayqmk&callback=initMap"
+    async defer></script>
+        <div id="map_canvas" onclick="mapDivClicked(event);" style="height: 450px; width: 650px;"></div>
+        <div>
+		 <input id="posX" type="hidden" />
+       <input id="posY" type="hidden" />
+
+        </div>  
+</div>
+</div>		
+<div id="form">
+        
+		    <label for="">Latitude</label>
+           <input type="text" name="lat" id="lat" class="form-control"><br>
+		   <label for="">Longitude</label>
+           <input type="text" name="lng" id="lng" class="form-control"><br>
+            <label for="">Address</label>
+            <textarea name="address" id="address" cols="30" rows="5" class="form-control"></textarea><br>
+            <label for="">City</label>
+            <input type="text" name="City" id="City" class="form-control"><br>
+            <label for="">State</label>
+            <input type="text" value="{{data.state}}"name="State" id="State" class="form-control"><br>
+            <label for="">Pincode</label>
+            <input value="{{data.pincode}}" type="text" name="Pincode" id="Pincode" class="form-control"><br><br>
+            <button type="submit" class="btnn"><b>Sign up</b></button>
+        </div>
+    </div>
+
+</div>
+</form>
+</body>
+            <!--<div class="box">
+            <h3><b>Rules to register</b></h3>
+            <p>A prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses.a prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses,a prefix appearing in loanwords from Greek, most often attached to verbs and verbal derivatives, with the meanings “at or to one side of, beside, side by side” ( parabola; paragraph; parallel; paralysis), “beyond, past, by” ( paradox; paragogue); by extension from these senses,</p>
+            </div>
+        </div>
+    </div>
+</div>-->
+</html>

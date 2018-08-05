@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="js/jquery.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.js"></script>
+    <style>
+        body{
+            background: #E9D460;
+        }    
+        .box{
+            border: 2px solid black;
+            padding: 25px;
+            width: 40%;
+            height: 50%;
+        }
+        .qr{
+            background: white;
+            width: 150px;
+            height: 150px;
+            position: relative;
+            top: 20px;
+        }
+        .mem{
+            position: relative;
+            top: -190px;
+            left: 200px;
+        }
+        .mini{
+            background: white;
+            width: 150px;
+            height: 150px;
+        }
+        .b1{
+            position: relative;
+            top: -150px;
+        }
+        .b2{
+            position: relative;
+            top: -130px; 
+        }
+        .b3{
+            position: relative;
+            top: -110px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <br><br><br><br>
+        <div class="row">
+            <div class="col-md-4 col-lg-4"></div>
+            <div class="col-md-4 col-lg-4 box">
+                <br>
+                <div class="qr"></div><br>
+                <div class="mem">
+                    <h4>Members</h4>
+                    <div class="mini"></div>
+                </div>
+                <button class="btn btn-primary b1">Share</button><br>
+                <button class="btn btn-success b2">Update</button><br>
+                <button class="btn btn-danger b3">Add or Remove</button>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
